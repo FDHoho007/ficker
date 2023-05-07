@@ -10,4 +10,7 @@ COPY template_message.html .
 COPY template_message.txt .
 COPY template_subject.txt .
 
-CMD [ "python", "./ficker.py" ]
+COPY crontab /etc/cron.d/crontab
+RUN crontab /etc/cron.d/crontab
+
+CMD ["cron", "-f"]
