@@ -1,17 +1,17 @@
 from icalendar import Calendar
 from datetime import datetime, date
 from urllib import request
-import re
+import os, re
 from smtplib import SMTP_SSL
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-ICS_URL = "https://cloud.fdhoho007.de/remote.php/dav/public-calendars/MHoRqojfoAbL2Xtr?export"
-SMTP_HOST = "mail.myfdweb.de"
-SMTP_PORT = 465
-SMTP_USER = "ficker@fickt-di.ch"
-SMTP_PASSWORD = "Eg!t2U@SwDZr@t3mbkR4KGjyLrx*LgbTnW72wYxdvq^H6VoM*ePBp^KV2!4GFQMfw*XsM&PK4nYxdzbpiyN3%WUd6agXNseyyBZxY*dxonp%7*RkibB4g8BvGwXm4AmX"
-NOTIFY_DAYS = "30,14,7,3,2,1,0"
+ICS_URL = os.getenv("ICS_URL")
+SMTP_HOST = os.getenv("SMTP_HOST")
+SMTP_PORT = os.getenv("SMTP_PORT")
+SMTP_USER = os.getenv("SMTP_USER")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+NOTIFY_DAYS = os.getenv("NOTIFY_DAYS")
 
 # From https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
 MAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
