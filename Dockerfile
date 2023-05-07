@@ -13,4 +13,4 @@ COPY template_subject.txt .
 COPY crontab /etc/cron.d/crontab
 RUN crontab /etc/cron.d/crontab
 
-CMD ["cron", "-f"]
+CMD ["crond", "&&", "tail", "-f", "/usr/src/app/log.txt"]
