@@ -32,6 +32,7 @@ def send_mail(from_addr, to_addr, subject, message_plain, message_html):
     msg["From"] = from_addr
     msg["To"] = to_addr
     msg["Subject"] = subject
+    msg["Date"] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
     msg.attach(MIMEText(message_html, "html"))
     msg.attach(MIMEText(message_plain, "plain"))
     smtp.sendmail(from_addr, to_addr, msg.as_string())
