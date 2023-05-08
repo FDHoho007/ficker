@@ -47,7 +47,7 @@ for component in cal.walk():
     if(component.name == "VEVENT") and isinstance(component.decoded("dtstart"), date):
         days = (component.decoded("dtstart") - datetime.now().date()).days
         if str(days) in NOTIFY_DAYS:
-            from_addr = component.get("summary") + " <" + component.get("summary").lower() + "@fickt-di.ch>"
+            from_addr = component.get("summary") + " <" + component.get("summary").lower().replace(" ", "_") + "@fickt-di.ch>"
             subject = template("template_subject.txt", component)
             message_plain = template("template_message.txt", component)
             message_html = template("template_message.html", component)
