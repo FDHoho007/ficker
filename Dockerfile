@@ -1,6 +1,8 @@
-FROM python:3.9-alpine
+FROM debian
 
 WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y cron python3 python3-pip
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
@@ -13,4 +15,4 @@ COPY template_subject.txt .
 COPY crontab /etc/cron.d/crontab
 RUN crontab /etc/cron.d/crontab
 
-CMD ["crond", "&&", "tail", "-f", "/usr/src/app/log.txt"]
+CMD ["cron", "-f"]

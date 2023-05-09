@@ -1,1 +1,2 @@
-0 7 * * * cd /usr/src/app && python ficker.py >> log.txt 2>&1
+0 8 * * * cd /usr/src/app && python ficker.py >> log.txt 2>&1
+
