@@ -1,2 +1,2 @@
-10 8 * * * cd /usr/src/app && python ficker.py >> log.txt 2>&1
-
+* * * * * python3 /usr/src/app/ficker.py
+* * * * * touch /test.txt

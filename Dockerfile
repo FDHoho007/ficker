@@ -11,8 +11,10 @@ COPY ficker.py .
 COPY template_message.html .
 COPY template_message.txt .
 COPY template_subject.txt .
+RUN touch /usr/src/app/log.txt
 
 COPY crontab /etc/cron.d/crontab
 RUN crontab /etc/cron.d/crontab
 
-CMD ["cron", "-f"]
+#CMD ["tail", "-f", "/usr/src/app/log.txt"]
+CMD ["cron", "&&", "tail", "-f", "/usr/src/app/log.txt"]
