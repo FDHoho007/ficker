@@ -28,6 +28,8 @@ def template(file, vevent):
 
 def send_mail(from_addr, to_addr, subject, message_plain, message_html):
     msg = MIMEMultipart("alternative")
+    from_addr = from_addr.encode('punycode').decode()
+    to_addr = to_addr.encode('punycode').decode()
     msg["From"] = from_addr
     msg["To"] = to_addr
     msg["Subject"] = subject
