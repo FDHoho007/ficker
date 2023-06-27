@@ -54,6 +54,8 @@ for component in cal.walk():
             message_plain = template("template_message.txt", component)
             message_html = template("template_message.html", component)
             for to_addr in component.get("description").split("\n"):
+                if to_addr.endswith("-"):
+                    to_addr = to_addr[0:-1]
                 if(MAIL_REGEX.match(to_addr)):
                     send_mail(from_addr, to_addr, subject, message_plain, message_html)
 
