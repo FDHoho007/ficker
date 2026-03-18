@@ -1,5 +1,7 @@
 stages:
   - build
+  - test
+  - deploy
 
 create-pages:
   script:
