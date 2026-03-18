@@ -2,7 +2,7 @@ stages:
   - build
 
 create-pages:
-  script: []
+  script: ""
   pages:
     publish: html
   rules:
