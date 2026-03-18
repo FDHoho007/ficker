@@ -1,12 +1,22 @@
-# The Docker image that will be used to build your app
-image: alpine:latest
+stages:
+  - build
+
 create-pages:
-  script:
-    - cp -r html/ public/
+  script: []
   pages:
-    # The folder that contains the files to be exposed at the Page URL
-    publish: public
+    publish: html
   rules:
-    # This ensures that only pushes to the default branch will trigger
-    # a pages deploy
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+build-image:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "$CI_PROJECT_DIR"
+      --destination "$CI_REGISTRY_IMAGE:latest"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - when: manual
