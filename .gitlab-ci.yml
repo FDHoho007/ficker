@@ -2,9 +2,10 @@ stages:
   - build
 
 create-pages:
-  script: ""
+  script:
+    - cp -r html/ public/
   pages:
-    publish: html
+    publish: public
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 
