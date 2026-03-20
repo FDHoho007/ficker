@@ -3,6 +3,10 @@ stages:
   - test
   - deploy
 
+include:
+  - project: "myfdweb/infrastructure/ci-templates"
+    file: "/kaniko.yml"
+
 create-pages:
   script:
     - cp -r html/ public/
@@ -12,14 +16,4 @@ create-pages:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 
 build-image:
-  stage: build
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
-  script:
-    - /kaniko/executor
-      --context "$CI_PROJECT_DIR"
-      --destination "$CI_REGISTRY_IMAGE:latest"
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - when: manual
+  extends: .kaniko
